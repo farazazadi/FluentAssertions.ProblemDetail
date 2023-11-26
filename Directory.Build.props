@@ -1,0 +1,12 @@
+<Project>
+	<PropertyGroup>
+		<LangVersion>11.0</LangVersion>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="FluentAssertions" Version="6.12.0" PrivateAssets="All" />
+	</ItemGroup>
+</Project>

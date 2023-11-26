@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
+		<Nullable>enable</Nullable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Features>strict</Features>
+		<SignAssembly>True</SignAssembly>
+		<AssemblyOriginatorKeyFile>..\FluentAssertions.ProblemDetails.snk</AssemblyOriginatorKeyFile>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+		<EmbedUntrackedSources>True</EmbedUntrackedSources>
+		<Deterministic>True</Deterministic>
+		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+		<PackageIcon>Icon.png</PackageIcon>
+
+		<Authors>Faraz Azadi</Authors>
+		<Description>Fluent Assertions extensions for ProblemDetails within HttpResponseMessage</Description>
+		<PackageTags>FluentAssertions;ProblemDetails;HttpResponseMessage;BDD;TDD;Fluent</PackageTags>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+		<PackageProjectUrl>https://github.com/farazazadi/FluentAssertions.ProblemDetails</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/farazazadi/FluentAssertions.ProblemDetails</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+
+		<ProblemDetailAssemblyPublicKey>00240000048000009400000006020000002400005253413100040000010001009544c213f5b621d9e4a57a7710ce4d780e505bae74366dc12231e575f9acfad49ce34bc4184b9fca0b69470659413c6bdcdac2aed45fc29421740fa1407bcf9f1a2bd24495530d679ee9dab2914190ebaa38e5535351224e46c918ca43f4f469db5ef6c564a6444cf5d93a5f474bf54a095e9b6608e33a3fc34d04f385328db1</ProblemDetailAssemblyPublicKey>
+
+		<MinVerTagPrefix>v</MinVerTagPrefix>
+
+	</PropertyGroup>
+
+
+	<Choose>
+		<When Condition="$([System.DateTime]::Now.Year) &gt; 2023">
+			<PropertyGroup>
+				<Copyright>Copyright © 2023-$([System.DateTime]::Now.Year) Faraz Azadi. All rights reserved.</Copyright>
+			</PropertyGroup>
+		</When>
+		<Otherwise>
+			<PropertyGroup>
+				<Copyright>Copyright © 2023 Faraz Azadi. All rights reserved.</Copyright>
+			</PropertyGroup>
+		</Otherwise>
+	</Choose>
+
+	<ItemGroup>
+		<None Include="..\Icon.png" Pack="true" Visible="false" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+	  <PackageReference Include="MinVer" Version="4.3.0" PrivateAssets="All" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<InternalsVisibleTo Include="FluentAssertions.ProblemDetail.Tests" Key="$(ProblemDetailAssemblyPublicKey)"/>
+	</ItemGroup>
+
+
+</Project>
