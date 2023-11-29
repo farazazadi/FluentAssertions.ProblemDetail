@@ -50,11 +50,12 @@
 	<ItemGroup>
 	  <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
 	  <PackageReference Include="MinVer" Version="4.3.0" PrivateAssets="All" />
+	  <PackageReference Include="System.Net.Http.Json" Version="8.0.0" />
+	  <PackageReference Include="System.Text.Json" Version="8.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="FluentAssertions.ProblemDetail.Tests" Key="$(ProblemDetailAssemblyPublicKey)"/>
 	</ItemGroup>
-
 
 </Project>
