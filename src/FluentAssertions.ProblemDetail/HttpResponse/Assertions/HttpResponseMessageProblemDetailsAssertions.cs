@@ -116,4 +116,31 @@ public class HttpResponseMessageProblemDetailsAssertions : HttpResponseMessageAs
         return new AndConstraint<HttpResponseMessageProblemDetailsAssertions>(this);
     }
 
+
+
+    /// <summary>
+    /// Asserts that <see cref="Common.ProblemDetails.Status"/> is equal to <paramref name="expectedStatusCode"/>.
+    /// </summary>
+    /// <param name="expectedStatusCode"></param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <see paramref="because" />.
+    /// </param>
+    [CustomAssertion]
+    public AndConstraint<HttpResponseMessageProblemDetailsAssertions> WithStatus(int? expectedStatusCode,
+        string because = "", params object[] becauseArgs)
+    {
+        Execute.Assertion
+            .ForCondition(ProblemDetails!.Status == expectedStatusCode)
+            .BecauseOf(because, becauseArgs)
+            .FailWith("Expected {context} to have a ProblemDetails whose {0} is {1}{reason}, but found {2}.",
+                "StatusCode", expectedStatusCode, ProblemDetails!.Status);
+
+        return new AndConstraint<HttpResponseMessageProblemDetailsAssertions>(this);
+    }
+
+
 }
