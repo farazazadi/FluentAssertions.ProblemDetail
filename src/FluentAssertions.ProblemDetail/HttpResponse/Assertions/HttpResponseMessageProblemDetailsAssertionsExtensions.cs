@@ -93,4 +93,26 @@ public static class HttpResponseMessageProblemDetailsAssertionsExtensions
         => new HttpResponseMessageProblemDetailsAssertions(assertion.And.Subject, assertion.And.ProblemDetails!)
             .WithStatus(expectedStatusCode, because, becauseArgs);
 
+
+
+    /// <summary>
+    /// Asserts that <see cref="ProblemDetails.Detail"/> is equal to <paramref name="expectedDetail"/>.
+    /// </summary>
+    /// <param name="assertion"></param>
+    /// <param name="expectedDetail"></param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <see paramref="because" />.
+    /// </param>
+    [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageProblemDetailsAssertions> WithDetail(
+        this AndConstraint<HttpResponseMessageProblemDetailsAssertions> assertion,
+        string? expectedDetail,
+        string because = "", params object[] becauseArgs)
+        => new HttpResponseMessageProblemDetailsAssertions(assertion.And.Subject, assertion.And.ProblemDetails!)
+            .WithDetail(expectedDetail, because, becauseArgs);
+
 }
