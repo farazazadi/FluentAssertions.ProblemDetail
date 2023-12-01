@@ -171,4 +171,34 @@ public class HttpResponseMessageProblemDetailsAssertions : HttpResponseMessageAs
         return new AndConstraint<HttpResponseMessageProblemDetailsAssertions>(this);
     }
 
+
+
+
+    /// <summary>
+    /// Asserts that <see cref="Common.ProblemDetails.Detail"/> contains <paramref name="expected"/> string.
+    /// </summary>
+    /// <param name="expected"></param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <see paramref="because" />.
+    /// </param>
+    [CustomAssertion]
+    public AndConstraint<HttpResponseMessageProblemDetailsAssertions> WithDetailThatContains(string expected,
+        string because = "", params object[] becauseArgs)
+    {
+        var success = ProblemDetails!.Detail is not null &&
+                      ProblemDetails!.Detail.Contains(expected);
+
+        Execute.Assertion
+            .ForCondition(success)
+            .BecauseOf(because, becauseArgs)
+            .FailWith("Expected {context} to have a ProblemDetails whose {0} contains {1}{reason}.",
+                "Detail", expected);
+
+        return new AndConstraint<HttpResponseMessageProblemDetailsAssertions>(this);
+    }
+
 }
