@@ -137,4 +137,27 @@ public static class HttpResponseMessageProblemDetailsAssertionsExtensions
             .WithDetailThatContains(expected, because, becauseArgs);
 
 
+
+    /// <summary>
+    /// Asserts that <see cref="ProblemDetails.Extensions"/> contains the specified <paramref name="value" /> for the supplied
+    /// <paramref name="key" />.
+    /// </summary>
+    /// <param name="assertion"></param>
+    /// <param name="key">The key for which to validate the value</param>
+    /// <param name="value">The value to validate</param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <paramref name="because" />.
+    /// </param>
+    [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageProblemDetailsAssertions> WithExtensionsThatContain<TValue>(
+        this AndConstraint<HttpResponseMessageProblemDetailsAssertions> assertion,
+        string key, TValue value,
+        string because = "", params object[] becauseArgs)
+        => new HttpResponseMessageProblemDetailsAssertions(assertion.And.Subject, assertion.And.ProblemDetails!)
+            .WithExtensionsThatContain(key, value, because, becauseArgs);
+
 }

@@ -1,7 +1,9 @@
-﻿using FluentAssertions.Execution;
+﻿using System.Collections.Generic;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using System.Net.Http;
 using FluentAssertions.ProblemDetail.Common;
+using System.Text.Json;
 
 namespace FluentAssertions.ProblemDetail.HttpResponse.Assertions;
 
@@ -197,6 +199,90 @@ public class HttpResponseMessageProblemDetailsAssertions : HttpResponseMessageAs
             .BecauseOf(because, becauseArgs)
             .FailWith("Expected {context} to have a ProblemDetails whose {0} contains {1}{reason}.",
                 "Detail", expected);
+
+        return new AndConstraint<HttpResponseMessageProblemDetailsAssertions>(this);
+    }
+
+
+
+    /// <summary>
+    /// Asserts that <see cref="ProblemDetails.Extensions"/> contains the specified <paramref name="value" /> for the supplied
+    /// <paramref name="key" />.
+    /// </summary>
+    /// <param name="key">The key for which to validate the value</param>
+    /// <param name="value">The value to validate</param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <paramref name="because" />.
+    /// </param>
+    [CustomAssertion]
+    public AndConstraint<HttpResponseMessageProblemDetailsAssertions> WithExtensionsThatContain<TValue>(
+        string key, TValue value,
+        string because = "", params object[] becauseArgs)
+    {
+
+        IDictionary<string, object?> extensions = ProblemDetails!.Extensions;
+
+        var context = $"{Execute.Assertion.CallerIdentity}.ProblemDetails.Extensions";
+        using var scope = new AssertionScope(context);
+
+
+        var expectedKeyExist = extensions.ContainsKey(key);
+
+        Execute.Assertion
+            .ForCondition(expectedKeyExist)
+            .BecauseOf(because, becauseArgs)
+            .FailWith("Expected {context:dictionary} {0} to contain key {1}{reason}.", extensions, key);
+
+
+        object? actualValue = extensions[key];
+
+
+        if (actualValue is null)
+        {
+            Execute.Assertion
+                .BecauseOf(because, becauseArgs)
+                .FailWith("Expected {context:dictionary} {0} to contain value {1} at key {2}{reason}, but value was <null>.",
+                    extensions, value, key, actualValue);
+
+            return new AndConstraint<HttpResponseMessageProblemDetailsAssertions>(this);
+        }
+
+
+        var valueMismatchMessage = "Expected {context:dictionary} {0} to contain value {1} at key {2}{reason}, but found {3}.";
+
+        if (actualValue is JsonElement jsonElement)
+        {
+            try
+            {
+                var jsonElementValue = jsonElement.Deserialize<TValue>();
+
+                Execute.Assertion
+                    .ForCondition(jsonElementValue is not null && jsonElementValue.Equals(value))
+                    .BecauseOf(because, becauseArgs)
+                    .FailWith(valueMismatchMessage, extensions, value, key, jsonElement);
+            }
+            catch (JsonException)
+            {
+                scope.Discard();
+
+                Execute.Assertion
+                    .BecauseOf(because, becauseArgs)
+                    .FailWith(valueMismatchMessage, extensions, value, key, jsonElement);
+            }
+
+            return new AndConstraint<HttpResponseMessageProblemDetailsAssertions>(this);
+        }
+
+
+        Execute.Assertion
+            .ForCondition(((TValue)actualValue).Equals(value))
+            .BecauseOf(because, becauseArgs)
+            .FailWith(valueMismatchMessage, extensions, value, key, actualValue);
+
 
         return new AndConstraint<HttpResponseMessageProblemDetailsAssertions>(this);
     }
