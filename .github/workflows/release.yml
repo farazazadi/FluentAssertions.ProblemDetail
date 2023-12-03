@@ -32,7 +32,7 @@ jobs:
         run: dotnet test -c release --no-build -l trx --verbosity=normal
         
       - name: Pack
-        run: dotnet pack ./src/FluentAssertions.ProblemDetail.csproj -c Release -o ./artifacts --no-build
+        run: dotnet pack ./src/FluentAssertions.ProblemDetail/FluentAssertions.ProblemDetail.csproj -c Release -o ./artifacts --no-build
 
       - name: Push to NuGet
         run: dotnet nuget push ./artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
