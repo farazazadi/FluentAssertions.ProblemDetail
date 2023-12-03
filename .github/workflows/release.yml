@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+    - '*.*.*'
+    
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          
+      - name: Setup .Net SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: |
+            6.0.x
+            7.0.x
+            8.0.x
+
+      - name: Clean
+        run: dotnet clean -c release
+
+      - name: Build
+        run: dotnet build -c release
+      
+      - name: Test
+        run: dotnet test -c release --no-build -l trx --verbosity=normal
+
+      - name: Remove old artifacts if exist
+        run: rm -rf ./artifacts
+        
+      - name: Pack
+        run: dotnet pack ./App/App.csproj -c Release -o ./artifacts --no-build
+
+      - name: Push to NuGet
+        run: dotnet nuget push ./artifacts/*.nupkg --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }}
