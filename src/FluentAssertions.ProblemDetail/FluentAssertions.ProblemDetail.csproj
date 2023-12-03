@@ -11,6 +11,7 @@
 		<AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
 		<EmbedUntrackedSources>True</EmbedUntrackedSources>
 		<Deterministic>True</Deterministic>
+		<ContinuousIntegrationBuild Condition="'$(GITHUB_ACTIONS)' == 'true'">True</ContinuousIntegrationBuild>
 		<ProduceReferenceAssembly>True</ProduceReferenceAssembly>
 		<PackageIcon>Icon.png</PackageIcon>
 
