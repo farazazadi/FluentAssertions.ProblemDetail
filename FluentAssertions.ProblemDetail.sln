@@ -9,11 +9,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{EF5D7F25
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.ProblemDetail", "src\FluentAssertions.ProblemDetail\FluentAssertions.ProblemDetail.csproj", "{2AE757C0-45AA-4BDD-B0E2-F7CA921D4242}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.ProblemDetail.Tests", "tests\FluentAssertions.ProblemDetail.Tests\FluentAssertions.ProblemDetail.Tests.csproj", "{D51FA0C9-E61D-48FD-B030-A81B09A756D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.ProblemDetail.Tests", "tests\FluentAssertions.ProblemDetail.Tests\FluentAssertions.ProblemDetail.Tests.csproj", "{D51FA0C9-E61D-48FD-B030-A81B09A756D5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{97F1E530-201C-4923-BCEF-050474949DFF}"
 	ProjectSection(SolutionItems) = preProject
+		.github\workflows\ci.yml = .github\workflows\ci.yml
 		Directory.Build.props = Directory.Build.props
+		.github\workflows\release.yml = .github\workflows\release.yml
 	EndProjectSection
 EndProject
 Global
