@@ -20,8 +20,8 @@
 		<PackageTags>FluentAssertions;ProblemDetails;HttpResponseMessage;BDD;TDD;Fluent</PackageTags>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
 
-		<PackageProjectUrl>https://github.com/farazazadi/FluentAssertions.ProblemDetails</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/farazazadi/FluentAssertions.ProblemDetails</RepositoryUrl>
+		<PackageProjectUrl>https://github.com/farazazadi/FluentAssertions.ProblemDetail</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/farazazadi/FluentAssertions.ProblemDetail</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 
 		<ProblemDetailAssemblyPublicKey>00240000048000009400000006020000002400005253413100040000010001009544c213f5b621d9e4a57a7710ce4d780e505bae74366dc12231e575f9acfad49ce34bc4184b9fca0b69470659413c6bdcdac2aed45fc29421740fa1407bcf9f1a2bd24495530d679ee9dab2914190ebaa38e5535351224e46c918ca43f4f469db5ef6c564a6444cf5d93a5f474bf54a095e9b6608e33a3fc34d04f385328db1</ProblemDetailAssemblyPublicKey>
