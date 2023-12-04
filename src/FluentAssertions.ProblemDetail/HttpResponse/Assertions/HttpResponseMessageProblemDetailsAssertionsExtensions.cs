@@ -139,6 +139,28 @@ public static class HttpResponseMessageProblemDetailsAssertionsExtensions
 
 
     /// <summary>
+    /// Asserts that <see cref="ProblemDetails.Instance"/> is equal to <paramref name="expectedInstance"/>.
+    /// </summary>
+    /// <param name="assertion"></param>
+    /// <param name="expectedInstance"></param>
+    /// <param name="because">
+    /// A formatted phrase as is supported by <see cref="string.Format(string,object[])" /> explaining why the assertion
+    /// is needed. If the phrase does not start with the word <i>because</i>, it is prepended automatically.
+    /// </param>
+    /// <param name="becauseArgs">
+    /// Zero or more objects to format using the placeholders in <see paramref="because" />.
+    /// </param>
+    [CustomAssertion]
+    public static AndConstraint<HttpResponseMessageProblemDetailsAssertions> WithInstance(
+        this AndConstraint<HttpResponseMessageProblemDetailsAssertions> assertion,
+        string? expectedInstance,
+        string because = "", params object[] becauseArgs)
+        => new HttpResponseMessageProblemDetailsAssertions(assertion.And.Subject, assertion.And.ProblemDetails!)
+            .WithInstance(expectedInstance, because, becauseArgs);
+
+
+
+    /// <summary>
     /// Asserts that <see cref="ProblemDetails.Extensions"/> contains the specified <paramref name="value" /> for the supplied
     /// <paramref name="key" />.
     /// </summary>
